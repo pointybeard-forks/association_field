@@ -159,12 +159,7 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         $related_values = $this->findRelatedValues($selected_ids);
 
         // Group values
-        $association_context = $this->getAssociationContext();
         foreach ($related_values as $value) {
-            if (!empty($association_context['interface'])) {
-                $value['value'] = htmlspecialchars($value['value']);
-            }
-
             $values[$value['id']] = $value['value'];
         }
 
@@ -180,6 +175,10 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
     {
         $options = $this->findOptions();
         $output = $options[0]['values'];
+
+        foreach ($output as $key => $value) {
+            $output[$key] = htmlspecialchars($value);
+        }
 
         if ($this->get('required') !== 'yes') {
             $output[""] = __('None');
@@ -725,14 +724,24 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         }
 
         $result = $this->findRelatedValues($data['relation_id']);
-        $output = '';
+        $context = $this->getAssociationContext();
+        $output = new XMLElement('div', null, array(
+            'data-interface' => $context['interface'],
+            'data-count' => count($result),
+            'data-label-singular' => __('association'),
+            'data-label-plural' => __('associations')
+        ));
+        $list = new XMLElement('ul');
 
         foreach ($result as $item) {
-            $link = Widget::Anchor(is_null($item['value']) ? '' : $item['value'], sprintf('%s/publish/%s/edit/%d/', SYMPHONY_URL, $item['section_handle'], $item['id']));
-            $output .= $link->generate() . ', ';
+            $link = Widget::Anchor(is_null($item['value']) ? '' : htmlspecialchars_decode($item['value']), sprintf('%s/publish/%s/edit/%d/', SYMPHONY_URL, $item['section_handle'], $item['id']));
+            $item = new XMLElement('li');
+            $item->appendChild($link);
+            $list->appendChild($item);
         }
 
-        return trim($output, ', ');
+        $output->appendChild($list);
+        return $output->generate();
     }
 
     public function preparePlainTextValue($data, $entry_id = null, $truncate = false, $defaultValue = null)
@@ -749,7 +758,7 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
 
         $label = '';
         foreach ($result as $item) {
-            $label .= $item['value'] . ', ';
+            $label .= strip_tags(htmlspecialchars_decode($item['value'])) . ', ';
         }
 
         return trim($label, ', ');
