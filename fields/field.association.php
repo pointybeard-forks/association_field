@@ -726,6 +726,7 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         $result = $this->findRelatedValues($data['relation_id']);
         $context = $this->getAssociationContext();
         $output = new XMLElement('div', null, array(
+            'class' => ($this->get('allow_multiple_selection') === 'yes' ? 'multi' : 'single'),
             'data-interface' => $context['interface'],
             'data-count' => count($result),
             'data-label-singular' => __('association'),

@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.1" date="2015-07-21" min="2.5">
+			- Removed association count from index for single select fields
+		</release>
 		<release version="1.0.0" date="2015-07-21" min="2.5">
 			- Enabled publish filtering
 			- Fixed importing
