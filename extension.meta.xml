@@ -13,7 +13,7 @@
 		</author>
 	</authors>
 	<releases>
-		<release version="1.1.0" date="2016-02-22" min="2.5">
+		<release version="1.1.0" date="2016-10-06" min="2.5" max="2.6.x">
 			- Added new `AssociationFiltering` delegate allowing extension to filter results
 			- Fix MySQL 5.7 Distinct, order by error when in strict mode
 		</release>
