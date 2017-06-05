@@ -766,10 +766,10 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         return $output->generate();
     }
 
-    public function preparePlainTextValue($data, $entry_id = null, $truncate = false, $defaultValue = null)
+    public function prepareReadableValue($data, $entry_id = null, $truncate = false, $defaultValue = null)
     {
         if (!is_array($data) || (is_array($data) && !isset($data['relation_id']))) {
-            return parent::preparePlainTextValue($data, $entry_id, $truncate, $defaultValue);
+            return parent::prepareReadableValue($data, $entry_id, $truncate, $defaultValue);
         }
 
         if (!is_array($data['relation_id'])) {
