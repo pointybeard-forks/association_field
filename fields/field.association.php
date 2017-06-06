@@ -740,7 +740,7 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         }
 
         if (!is_null($link)) {
-            $link->setValue($this->preparePlainTextValue($data, $entry_id));
+            $link->setValue($this->prepareReadableValue($data, $entry_id));
             return $link->generate();
         }
 
