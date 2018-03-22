@@ -36,6 +36,11 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
         return ($this->get('allow_multiple_selection') == 'yes' ? false : true);
     }
 
+    public function canPrePopulate()
+    {
+        return true;
+    }
+
     public function canFilter()
     {
         return true;
