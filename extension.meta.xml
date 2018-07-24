@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="association_field" status="development" xmlns="http://getsymphony.com/schemas/extension/1.0">
+<extension id="association_field" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Association Field</name>
 	<description>Linking entries between two sections</description>
 	<repo type="github">https://github.com/symphonists/association_field</repo>
@@ -13,6 +13,10 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="2.1.0" date="2018-07-24" min="2.6" max="2.x.x">
+			- Add canPrePopulate() (#28)
+			- Add related filter (#23)
+		</release>
 		<release version="2.0.2" date="2017-08-10" min="2.6" max="2.x.x">
 			- Symphony 2.7 compatibility
 		</release>
