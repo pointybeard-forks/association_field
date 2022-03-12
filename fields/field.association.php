@@ -164,6 +164,9 @@ class FieldAssociation extends Field implements ExportableField, ImportableField
                 if (!is_null($entry_id) && isset($group['values'][$entry_id])) {
                     unset($group['values'][$entry_id]);
                 }
+
+                asort($group['values']);
+
                 $values[] = $group;
             }
         }
